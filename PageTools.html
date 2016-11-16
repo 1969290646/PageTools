@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>分页按钮Demo</title>
+		<link rel="stylesheet" type="text/css" href="pageTools.css"/>
+	</head>
+	<body>
+		
+		<h1>渲染的数据</h1>
+		
+		<ul id="PageBtns" class="PageBtns">
+			
+		</ul>
+		
+		<br /><br />
+		
+		<script src="EventEmitter.js" type="text/javascript" charset="utf-8"></script>
+		<script src="pageTools.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var page = document.getElementById("PageBtns");
+			
+			var pagetools = new PageTools(page);
+			
+			//初始化渲染按钮
+			pagetools.renderBtn(1, 20, 7);
+			
+			//点击其他按钮触发的事件
+			pagetools.bind("other", function(evt){
+				console.log("第" + evt.value + "页按钮事件触发...");
+				pagetools.renderBtn(evt.value, 20, 7);
+			});
+			
+			//点击下一页绑定事件
+			pagetools.bind("next", function(evt){
+				console.log("下一页事件触发...");
+				pagetools.renderBtn(evt.old + 1, 20, 7);
+			});
+			
+			//点击下一页绑定事件
+			pagetools.bind("prev", function(evt){
+				console.log("上一页事件触发...");
+				pagetools.renderBtn(evt.old - 1, 20, 7);
+			});
+			
+			//点击首页按钮事件
+			pagetools.bind("start", function(evt){
+				console.log("首页事件触发...");
+				pagetools.renderBtn(1, 20, 7);
+			});
+			
+			//点击尾页按钮点击事件。
+			pagetools.bind("end", function(evt){
+				console.log("尾页事件触发...");
+				pagetools.renderBtn(20, 20, 7);
+			});
+			
+		</script>
+	</body>
+</html>
